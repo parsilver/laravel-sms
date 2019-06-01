@@ -1,0 +1,35 @@
+{
+  "name": "parsilver/laravel-sms",
+  "description": "SMS provider for laravel framework",
+  "keywords": ["laravel", "sms", "driver", "provider"],
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "parsilver",
+      "email": "magician_canobi@hotmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "illuminate/support": "^5.7"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^3.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Parsilver\\SMS\\": "src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Parsilver\\SMS\\SMSServiceProvider"
+      ],
+      "aliases": {
+        "SMS": "Parsilver\\SMS\\Facade\\SMS"
+      }
+    }
+  }
+}
