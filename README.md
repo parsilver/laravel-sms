@@ -139,3 +139,13 @@ class ExampleTest extends TestCase
     }
 }
 ```
+
+
+# Contributing
+
+หากท่านต้องการมีส่วนร่วมพัฒนาต่อใน repository นี้ ท่านต้องดำเนินการตามคำแนะนำดังนี้
+
+1. ต้องให้แน่ใจก่อนว่าท่านจะไม่ลบ dependency ของทางเรากำหนดมา
+2. ท่านต้องอัพเดดการเปลี่ยนแปลงผ่าน [README.md](README.md) ด้วย เพื่อแจ้งให้ผู้ใช้งานรับทราบ
+
+อ่านเพิ่มเติมที่ [CONTRIBUTING.md](CONTRIBUTING.md)
