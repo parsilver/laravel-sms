@@ -45,7 +45,8 @@ php artisan vendor:publish --provider="Parsilver\SMS\SMSServiceProvider" --tag="
 ## ผู้ให้บริการ SMS
 ตอนนี้ทางเรามีแค่ของ smartcomm เท่านั้นนะครับ หากท่านใดสนใจเพิ่มผู้ให้บริการก็ pull request มาได้เลยนะครับ
 
-#### Smartcomm
+#### Smartcomm Provider
+ดูเพิ่มเติมที่ [Net-Innova](http://www.net-innova.com/net_sms_marketing.html)
 ```dotenv
 # .env
 SMS_PROVIDER=smartcomm
@@ -53,7 +54,8 @@ SMS_SMARTCOMM_USERNAME=xxxxxx
 SMS_SMARTCOMM_PASSWORD=xxxxxx
 ```
 
-#### Null
+#### Null Provider
+ไม่ทำการส่งใดๆทั้งสิ้น
 ```dotenv
 # .env
 SMS_PROVIDER=null
