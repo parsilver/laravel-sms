@@ -1,6 +1,7 @@
 <?php namespace Parsilver\SMS\Provider;
 
 use Parsilver\SMS\Contract\SMSProvider;
+use GuzzleHttp\Client as GuzzleHttp;
 
 class SmartcommSMSProvider implements SMSProvider
 {
@@ -43,7 +44,7 @@ class SmartcommSMSProvider implements SMSProvider
             $payload['sender'] = $sender;
         }
 
-        $response = (new Client)->post(static::URL, [
+        $response = (new GuzzleHttp)->post(static::URL, [
             'form_params' => $payload
         ]);
 

@@ -47,6 +47,11 @@ php artisan vendor:publish --provider="Parsilver\SMS\SMSServiceProvider" --tag="
 
 #### Smartcomm Provider
 ดูเพิ่มเติมที่ [Net-Innova](http://www.net-innova.com/net_sms_marketing.html)
+
+โปรดติดตั้ง guzzlehttp ก่อนการใช้งาน
+```
+composer require guzzlehttp/guzzle
+```
 ```dotenv
 # .env
 SMS_PROVIDER=smartcomm
@@ -69,7 +74,7 @@ SMS_PROVIDER=null
 \SMS::send('0899991111', 'This is message');
 ```
 
-หรือด้วยวิธีจากการทำ DI ซึ่งในตัวอย่างนี้ทางเราได้ทำใน Controller ครับ ซึ่งท่านจะต้อง import class ด้านล่านเพื่อใช้งานด้วยครับ
+หรือด้วยวิธีจากการทำ DI ซึ่งในตัวอย่างนี้ทางเราได้ทำใน Controller ครับ ซึ่งท่านจะต้อง import class ด้านล่างเพื่อใช้งานด้วยครับ
 ```php
 <?php
 use Parsilver\SMS\Contract\SMSProvider;
@@ -146,8 +151,5 @@ class ExampleTest extends TestCase
 # Contributing
 
 หากท่านต้องการมีส่วนร่วมพัฒนาต่อใน repository นี้ ท่านต้องดำเนินการตามคำแนะนำดังนี้
-
-1. ต้องให้แน่ใจก่อนว่าท่านจะไม่ลบ dependency ของทางเรากำหนดมา
-2. ท่านต้องอัพเดดการเปลี่ยนแปลงผ่าน [README.md](README.md) ด้วย เพื่อแจ้งให้ผู้ใช้งานรับทราบ
 
 อ่านเพิ่มเติมที่ [CONTRIBUTING.md](CONTRIBUTING.md)
