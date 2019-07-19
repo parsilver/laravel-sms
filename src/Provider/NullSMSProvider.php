@@ -1,8 +1,6 @@
 <?php namespace Parsilver\SMS\Provider;
 
-use Parsilver\SMS\Contract\SMSProvider;
-
-class NullSMSProvider implements SMSProvider
+class NullSMSProvider extends AbstractSMSProvider
 {
     /**
      * @param string $phoneNumber

@@ -1,6 +1,6 @@
 <?php namespace Parsilver\SMS\Contract;
 
-interface SMSProvider
+interface SMSProvider extends SMSProviderFactory
 {
     /**
      * @param string $phoneNumber

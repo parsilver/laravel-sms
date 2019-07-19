@@ -1,9 +1,8 @@
 <?php namespace Parsilver\SMS\Provider;
 
-use Parsilver\SMS\Contract\SMSProvider;
 use PHPUnit\Framework\Assert as PHPUnit;
 
-class FakeSMSProvider implements SMSProvider
+class FakeSMSProvider extends AbstractSMSProvider
 {
     /**
      * All of the messages that have been sent.

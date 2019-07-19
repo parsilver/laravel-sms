@@ -3,6 +3,7 @@
   "description": "SMS provider for laravel framework",
   "keywords": ["laravel", "sms", "driver", "provider"],
   "minimum-stability": "dev",
+  "prefer-stable": true,
   "license": "MIT",
   "authors": [
     {
@@ -12,10 +13,11 @@
   ],
   "require": {
     "php": "^7.1",
-    "illuminate/support": "^5.7"
+    "illuminate/support": "~5.7.0|~5.8.0"
   },
   "require-dev": {
-    "orchestra/testbench": "^3.5"
+    "orchestra/testbench": "~3.8.0",
+    "guzzlehttp/guzzle": "^6.3"
   },
   "autoload": {
     "psr-4": {

@@ -1,10 +1,11 @@
 <?php namespace Parsilver\SMS;
 
 use Illuminate\Support\Manager as BaseManager;
+use Parsilver\SMS\Contract\SMSProviderFactory;
 use Parsilver\SMS\Provider\NullSMSProvider;
 use Parsilver\SMS\Provider\SmartcommSMSProvider;
 
-class Manager extends BaseManager
+class Manager extends BaseManager implements SMSProviderFactory
 {
     /**
      * Get the default driver name.

@@ -107,6 +107,56 @@ class UserController extends Controller
 ```
 
 
+## สร้างผู้ให้บริการของตัวเอง
+ในบางครั้งท่านอาจจะมีผู้ให้บริการของท่านเองอยู่แล้ว แต่อยากจะ Customize เอง สามารถทำได้ดังนี้
+```php
+<?php App\SMS;
+
+use Parsilver\SMS\Provider\AbstractSMSProvider;
+
+class MyProvider extends AbstractSMSProvider
+{
+    /**
+     * @param string $phoneNumber
+     * @param string $message
+     */
+    public function send($phoneNumber, $message)
+    {
+        // Process your provider here...
+    }
+}
+```
+
+จากนั้นให้ไปลงทะเบียนที่ app\Providers\AppServiceProvider.php
+```php
+<?php namespace App\Providers;
+
+use Parsilver\SMS\Facade\SMS;
+
+class AppServiceProvider extends ServiceProvider
+{
+    //....
+    
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        SMS::extend('myProvider', function() {
+            return new MyProvider();
+        });
+    }
+}
+```
+
+และเรียกใช้งานได้ด้วย
+```php
+\SMS::driver('myProvider')->send('0999999999', 'This is message');
+```
+
+
 ## การทดสอบใน PHPUnit
 คุณสามารถเปลี่ยนผู้ให้บริการเพื่อทดสอบได้ด้วย
 

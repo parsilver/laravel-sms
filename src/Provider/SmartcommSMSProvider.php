@@ -1,9 +1,8 @@
 <?php namespace Parsilver\SMS\Provider;
 
-use Parsilver\SMS\Contract\SMSProvider;
 use GuzzleHttp\Client as GuzzleHttp;
 
-class SmartcommSMSProvider implements SMSProvider
+class SmartcommSMSProvider extends AbstractSMSProvider
 {
     const URL = 'https://sc4msg.com/bulksms/SendMessage';
 

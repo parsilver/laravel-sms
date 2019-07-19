@@ -2,6 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 use Parsilver\SMS\Contract\SMSProvider;
+use Parsilver\SMS\Contract\SMSProviderFactory;
 
 class SMSServiceProvider extends ServiceProvider
 {
@@ -24,8 +25,12 @@ class SMSServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(SMSProvider::class, function($app) {
-            return (new Manager($app))->driver();
+        $this->app->singleton(SMSProviderFactory::class, function($app) {
+            return new Manager($app);
+        });
+
+        $this->app->bind(SMSProvider::class, function() {
+            return $this->app->make(SMSProviderFactory::class)->driver();
         });
     }
 }

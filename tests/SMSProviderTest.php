@@ -1,6 +1,11 @@
 <?php
 
 
+use Parsilver\SMS\Contract\SMSProvider;
+use Parsilver\SMS\Facade\SMS;
+use Parsilver\SMS\Provider\NullSMSProvider;
+use Parsilver\SMS\Provider\SmartcommSMSProvider;
+
 class SMSProviderTest extends Orchestra\Testbench\TestCase
 {
 
@@ -9,6 +14,32 @@ class SMSProviderTest extends Orchestra\Testbench\TestCase
         $this->assertInstanceOf(
             Parsilver\SMS\Provider\NullSMSProvider::class,
             $this->app->make(Parsilver\SMS\Contract\SMSProvider::class)
+        );
+    }
+
+
+    public function testSpecifyDriver()
+    {
+        // Current driver should be null
+        $this->assertInstanceOf(
+            Parsilver\SMS\Provider\NullSMSProvider::class,
+            Parsilver\SMS\Facade\SMS::driver()
+        );
+
+        // Try specify to smartcomm driver
+        $this->assertInstanceOf(
+            Parsilver\SMS\Provider\SmartcommSMSProvider::class,
+            Parsilver\SMS\Facade\SMS::driver('smartcomm')
+        );
+
+        // Driver should't change
+        $this->assertInstanceOf(
+            Parsilver\SMS\Provider\NullSMSProvider::class,
+            $this->app->make(Parsilver\SMS\Contract\SMSProvider::class)
+        );
+        $this->assertInstanceOf(
+            Parsilver\SMS\Provider\NullSMSProvider::class,
+            Parsilver\SMS\Facade\SMS::driver()
         );
     }
 
@@ -28,10 +59,10 @@ class SMSProviderTest extends Orchestra\Testbench\TestCase
     {
         Parsilver\SMS\Facade\SMS::fake();
 
-        $phoneNumber = '0899999999';
-        $message = 'This is message';
-
-        Parsilver\SMS\Facade\SMS::send($phoneNumber, $message);
+        Parsilver\SMS\Facade\SMS::send(
+            $phoneNumber = '0899999999',
+            $message = 'This is message'
+        );
 
         Parsilver\SMS\Facade\SMS::assertSent($phoneNumber, $message);
     }

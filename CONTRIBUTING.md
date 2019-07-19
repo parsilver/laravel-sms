@@ -8,10 +8,8 @@
 ```php
 <?php namespace Parsilver\SMS\Provider;
 
-use Parsilver\SMS\Contract\SMSProvider;
-
 // Location -> src/Provider/ExampleSMSProvider.php
-class ExampleSMSProvider implements SMSProvider
+class ExampleSMSProvider extends AbstractSMSProvider
 {
     /**
      * @param string $phoneNumber
