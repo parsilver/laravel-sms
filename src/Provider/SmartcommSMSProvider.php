@@ -5,7 +5,7 @@ use GuzzleHttp\Client as GuzzleHttp;
 
 class SmartcommSMSProvider implements SMSProvider
 {
-    const URL = 'http://smartcomm2.net/sc2lc/SendMessage';
+    const URL = 'https://sc4msg.com/bulksms/SendMessage';
 
     public $username;
     public $password;
