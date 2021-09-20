@@ -1,19 +1,28 @@
 <?php
 
+namespace Tests;
 
 use Parsilver\SMS\Contract\SMSProvider;
 use Parsilver\SMS\Facade\SMS;
+use Parsilver\SMS\Provider\FakeSMSProvider;
 use Parsilver\SMS\Provider\NullSMSProvider;
 use Parsilver\SMS\Provider\SmartcommSMSProvider;
+use Parsilver\SMS\SMSServiceProvider;
 
-class SMSProviderTest extends Orchestra\Testbench\TestCase
+class SMSProviderTest extends TestCase
 {
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->app->register(SMSServiceProvider::class);
+    }
 
     public function testShouldBeNullProviderByDefault()
     {
         $this->assertInstanceOf(
-            Parsilver\SMS\Provider\NullSMSProvider::class,
-            $this->app->make(Parsilver\SMS\Contract\SMSProvider::class)
+            NullSMSProvider::class, $this->app->make(SMSProvider::class)
         );
     }
 
@@ -22,56 +31,51 @@ class SMSProviderTest extends Orchestra\Testbench\TestCase
     {
         // Current driver should be null
         $this->assertInstanceOf(
-            Parsilver\SMS\Provider\NullSMSProvider::class,
-            Parsilver\SMS\Facade\SMS::driver()
+            NullSMSProvider::class, SMS::driver()
         );
 
-        // Try specify to smartcomm driver
+        // Try to specify smartcomm driver
         $this->assertInstanceOf(
-            Parsilver\SMS\Provider\SmartcommSMSProvider::class,
-            Parsilver\SMS\Facade\SMS::driver('smartcomm')
+            SmartcommSMSProvider::class, SMS::driver('smartcomm')
         );
 
-        // Driver should't change
+        // Driver shouldn't change
         $this->assertInstanceOf(
-            Parsilver\SMS\Provider\NullSMSProvider::class,
-            $this->app->make(Parsilver\SMS\Contract\SMSProvider::class)
+            NullSMSProvider::class, $this->app->make(SMSProvider::class)
         );
         $this->assertInstanceOf(
-            Parsilver\SMS\Provider\NullSMSProvider::class,
-            Parsilver\SMS\Facade\SMS::driver()
+            NullSMSProvider::class, SMS::driver()
         );
     }
 
 
     public function testShouldBeFakeProviderWhenSwapToFake()
     {
-        Parsilver\SMS\Facade\SMS::fake();
+        SMS::fake();
 
         $this->assertInstanceOf(
-            Parsilver\SMS\Provider\FakeSMSProvider::class,
-            $this->app->make(Parsilver\SMS\Contract\SMSProvider::class)
+            FakeSMSProvider::class, $this->app->make(SMSProvider::class)
         );
     }
 
 
     public function testSendSuccess()
     {
-        Parsilver\SMS\Facade\SMS::fake();
+        SMS::fake();
 
-        Parsilver\SMS\Facade\SMS::send(
+        SMS::send(
             $phoneNumber = '0899999999',
             $message = 'This is message'
         );
 
-        Parsilver\SMS\Facade\SMS::assertSent($phoneNumber, $message);
+        SMS::assertSent($phoneNumber, $message);
     }
 
 
     protected function getPackageProviders($app)
     {
         return [
-            Parsilver\SMS\SMSServiceProvider::class,
+            SMSServiceProvider::class,
         ];
     }
 
@@ -79,7 +83,7 @@ class SMSProviderTest extends Orchestra\Testbench\TestCase
     protected function getPackageAliases($app)
     {
         return [
-            'SMS' => Parsilver\SMS\Facade\SMS::class,
+            'SMS' => SMS::class,
         ];
     }
 }

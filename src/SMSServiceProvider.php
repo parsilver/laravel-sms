@@ -7,24 +7,14 @@ use Parsilver\SMS\Contract\SMSProviderFactory;
 class SMSServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $this->publishes([
-            __DIR__.'/config.php' => $this->app->configPath('sms.php'),
-        ], 'config');
-    }
-
-    /**
      * Register any application services.
      *
      * @return void
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__."/../config.php", "sms");
+
         $this->app->singleton(SMSProviderFactory::class, function($app) {
             return new Manager($app);
         });
@@ -32,5 +22,19 @@ class SMSServiceProvider extends ServiceProvider
         $this->app->bind(SMSProvider::class, function() {
             return $this->app->make(SMSProviderFactory::class)->driver();
         });
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../config.php' => $this->app->configPath('sms.php'),
+            ], 'config');
+        }
     }
 }

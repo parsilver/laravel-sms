@@ -14,7 +14,7 @@ class Manager extends BaseManager implements SMSProviderFactory
      */
     public function getDefaultDriver()
     {
-        return $this->app['config']['sms.default'] ?: 'null';
+        return $this->config->get('sms.default') ?: 'null';
     }
 
     /**
@@ -23,7 +23,7 @@ class Manager extends BaseManager implements SMSProviderFactory
      */
     protected function createSmartcommDriver()
     {
-        $config = $this->app['config']['sms.providers.smartcomm'];
+        $config = $this->config->get('sms.providers.smartcomm');
 
         return new SmartcommSMSProvider($config['username'], $config['password']);
     }
