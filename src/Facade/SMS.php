@@ -19,13 +19,15 @@ class SMS extends Facade
     /**
      * For test
      */
-    public static function fake()
+    public static function fake($driver = null)
     {
-        static::extend('fake', function() {
+        $driver = $driver ?: 'fake';
+
+        static::extend($driver, function() {
             return new FakeSMSProvider();
         });
 
-        static::swap(resolve(SMSProviderFactory::class)->driver('fake'));
+        static::swap(resolve(SMSProviderFactory::class)->driver($driver));
     }
 
     /**
